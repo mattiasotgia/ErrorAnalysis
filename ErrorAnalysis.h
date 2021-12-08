@@ -35,6 +35,14 @@ Double_t get_pValue(fFormula sFormula, Double_t* values){
         by changing every parameter in its error range;
     
     Arguments:
+        fFormula sFormula: std::string passed, is the formula used to compute error. Its implementation is the same 
+                           as in the TFormula ROOT class. It recgnise standard c++ math operators as sqrt(), pow(), 
+                           etc...
+                           If only 4 variables are used (x, y, z, t) the function might be written as f(x, y, z, t).
+                           If more are used the function need to be wirtten as f(x[1], x[2], ..., x[N]).
+        Double_t* values:  Array of variables (its dimension need to be exactly the same as the function dimension)
+        Double_t* errors:  Array of variable's errors (its dimension need to be exactly the same as the function 
+                           dimension)
 
 */
 Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
