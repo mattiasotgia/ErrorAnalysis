@@ -23,7 +23,7 @@
 
 typedef std::string fFormula;
 
-Double_t get_pValue(fFormula sFormula, Double_t* values, Double_t* errors){
+Double_t get_pValue(fFormula sFormula, Double_t* values){
     TFormula* tFormula = new TFormula("", sFormula.c_str());
     return tFormula->EvalPar(values);
 }
@@ -43,15 +43,16 @@ Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
     TFormula* tFormula = new TFormula("", sFormula.c_str());
     
     Double_t    eSquareSum = 0; //> Initialized squared-summation to zero
-    Double_t    evalF_inpoint;
+    Double_t    evalF_inpoint; //> Evaluate f at point
     Double_t    evalF_after, evalF_before;
     Double_t    diff_fAfter, diff_fBefore;
     Double_t    errMax;
-    Double_t   *vChanged_i_component_after;
-    Double_t   *vChanged_i_component_before;
 
     Int_t fNdim = tFormula->GetNdim();
     if(fNdim==1) exit(1);
+
+    Double_t    vChanged_i_component_after[fNdim];
+    Double_t    vChanged_i_component_before[fNdim];
 
     // tFormula->Eval(0,0,0,0); ** PROBLEMA => come fare per valutare funzioni n-dimensionali?
     // FIXED: found that method TFormula::EvalPar() passes an array `Double_t *x` for values
@@ -63,9 +64,11 @@ Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
             vChanged_i_component_before[j] = (j!=i)? (values[j]):(values[j] - errors[j]);
         }
         evalF_after = tFormula->EvalPar(vChanged_i_component_after);
-        diff_fAfter = abs(evalF_inpoint-evalF_after);
         evalF_before = tFormula->EvalPar(vChanged_i_component_before);
+
+        diff_fAfter = abs(evalF_inpoint-evalF_after);
         diff_fBefore = abs(evalF_inpoint-evalF_before);
+
         errMax = (diff_fAfter>diff_fBefore)? diff_fAfter:diff_fBefore;
 
         eSquareSum+=pow(errMax, 2);
