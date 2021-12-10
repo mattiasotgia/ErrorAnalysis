@@ -5,7 +5,7 @@
 */
 
 #include<iostream>
-#include"ErrorAnalysis.h"
+#include"ErrorAnalysis/ErrorAnalysis.h"
 
 int main(){
 

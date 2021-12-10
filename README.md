@@ -6,7 +6,7 @@ This library is based upon [ROOT](https://root.cern/) public framework, mainly `
 
 ## Installation
 
-In your (CustomLibs/$PATH) directory clone this repository using 
+In your ($PATH) directory clone this repository using 
 ```bash
 > git clone https://github.com/mattiasotgia/ErrorAnalysis.git
 ```
@@ -42,6 +42,18 @@ Now to load the Library in any program you'll need to
 ### Compiling
 If using ROOT macros, no other compiler instruction is needed.
 To use this library in compiled c/c++ programs you'll need to do the following: 
+```bash
+> g++ file_name.cpp -o exe_name -I$PATH/ -L$PATH/libs/ -lErrorAnalysis `root-config --glibs --cflags`
+```
+### Test example
+the `test.cpp` file give an example of this library usage, and can be compiled using:
+```bash
+> g++ test.cpp -o test -I$PATH -L$PATH/lib/ -lErrorAnalysis `root-config --glibs --cflags`
+```
+and executed via 
+```bash
+> ./test
+```
 ## Usage
 Two main functions:
 - `Double_t get_pValue(fFormula sFormula, Double_t* values)` will evaluate the formula for x, y, z, t (or x[0],..., x[N]) variables, returning a Double_t value.
