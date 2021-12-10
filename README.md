@@ -8,12 +8,16 @@ This library is based upon [ROOT](https://root.cern/) public framework, mainly `
 
 In your (CustomLibs/$PATH) directory clone this repository using 
 ```bash
-git clone https://github.com/mattiasotgia/ErrorAnalysis.git
+> git clone https://github.com/mattiasotgia/ErrorAnalysis.git
+```
+and compile the shared library using
+```bash
+> make
 ```
 Then go to $HOME and create (if non existing!) the `.rootrc` file by doing
 ```bash
-touch .rootrc
-````
+> touch .rootrc
+```
 and add the following line:
 ```
 Rint.Logon: ~/rootlogon.C
@@ -21,7 +25,7 @@ Rint.Logon: ~/rootlogon.C
 
 Finally, in your $HOME directory create a file named `rootlogon.C` by doing
 ```bash
-touch .rootlogon.C
+> touch .rootlogon.C
 ```
 and modify this file adding the following lines
 ```cpp
