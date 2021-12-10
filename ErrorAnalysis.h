@@ -23,10 +23,23 @@
 
 typedef std::string fFormula;
 
-Double_t get_pValue(fFormula sFormula, Double_t* values){
-    TFormula* tFormula = new TFormula("", sFormula.c_str());
-    return tFormula->EvalPar(values);
-}
+/*
+    Description:
+        get_pValue(sFormula, *values) - c++ function to compute Median value, or evaluate f in point.
+    
+    Arguments:
+        fFormula sFormula: std::string passed, is the formula used to compute error. Its implementation is the same 
+                           as in the TFormula ROOT class. It recgnise standard c++ math operators as sqrt(), pow(), 
+                           etc...
+                           The class `TFormula` supports unlimited number of variables and parameters. By default 
+                           the names which can be used for the variables are x,y,z,t or x[0],x[1],x[2],x[3],....x[N]
+                           for N-dimensional formulas.
+        Double_t* values:  Array of variables (its dimension need to be exactly the same as the function dimension)
+        Double_t* errors:  Array of variable's errors (its dimension need to be exactly the same as the function 
+                           dimension)
+
+*/
+Double_t get_pValue(fFormula sFormula, Double_t* values);
 
 /*
     Description:
@@ -46,45 +59,6 @@ Double_t get_pValue(fFormula sFormula, Double_t* values){
                            dimension)
 
 */
-Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
-    double pError;
-
-    TFormula* tFormula = new TFormula("", sFormula.c_str());
-    
-    Double_t    eSquareSum = 0; //> Initialized squared-summation to zero
-    Double_t    evalF_inpoint; //> Evaluate f at point
-    Double_t    evalF_before, evalF_after; //> Evaluate f before/after 
-    Double_t    diffF_before, diffF_after; //> Evaluate f diff
-    Double_t    errMax;
-
-    Int_t fNdim = tFormula->GetNdim();
-    if(fNdim==1) exit(1);
-
-    Double_t    vChanged_i_component_before[fNdim];
-    Double_t    vChanged_i_component_after[fNdim];
-
-    // tFormula->Eval(0,0,0,0); ** PROBLEMA => come fare per valutare funzioni n-dimensionali?
-    // FIXED: found that method TFormula::EvalPar() passes an array `Double_t *x` for values
-
-    for(int i=0; i<fNdim; i++){
-        evalF_inpoint = tFormula->EvalPar(values);
-        for(int j=0; j<fNdim; j++){
-            vChanged_i_component_before[j] = (j!=i)? (values[j]):(values[j] - errors[j]);
-            vChanged_i_component_after[j] = (j!=i)? (values[j]):(values[j] + errors[j]);
-        }
-        evalF_before = tFormula->EvalPar(vChanged_i_component_before);
-        evalF_after = tFormula->EvalPar(vChanged_i_component_after);
-
-        diffF_before = abs(evalF_inpoint-evalF_before);
-        diffF_after = abs(evalF_inpoint-evalF_after);
-
-        errMax = (diffF_after>diffF_before)? diffF_after:diffF_before;
-
-        eSquareSum+=pow(errMax, 2);
-    }
-
-    pError = sqrt(eSquareSum);
-    return pError;
-}
+Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors);
 
 #endif

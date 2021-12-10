@@ -4,10 +4,44 @@ C++ functions used to perform automatic error propagation using function evaluat
 ## Requirements
 This library is based upon [ROOT](https://root.cern/) public framework, mainly `TFormula` class.
 
+## Installation
+
+In your (CustomLibs/$PATH) directory clone this repository using 
+```bash
+git clone https://github.com/mattiasotgia/ErrorAnalysis.git
+```
+Then go to $HOME and create (if non existing!) the `.rootrc` file by doing
+```bash
+touch .rootrc
+````
+and add the following line:
+```
+Rint.Logon: ~/rootlogon.C
+```
+
+Finally, in your $HOME directory create a file named `rootlogon.C` by doing
+```bash
+touch .rootlogon.C
+```
+and modify this file adding the following lines
+```cpp
+{
+    gInterpreter->AddIncludePath("~/$PATH/");      // include PATH
+    gSystem->Load("~/$PATH/lib/libErrorAnalysis"); // load LIB
+}
+```
+
+Now to load the Library in any program you'll need to
+```cpp
+#include<ErrorAnalysis/ErrorAnalysis.h>
+```
+### Compiling
+If using ROOT macros, no other compiler instruction is needed.
+To use this library in compiled c/c++ programs you'll need to do the following: 
 ## Usage
 Two main functions:
-- `Double_t get_pValue(fFormula sFormula, Double_t* values)`
-- `Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors)`
+- `Double_t get_pValue(fFormula sFormula, Double_t* values)` will evaluate the formula for x, y, z, t (or x[0],..., x[N]) variables, returning a Double_t value.
+- `Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors)` will evaluate error for (x +/- ex), (y +/- ey), (z +/- ez), (t +/- et) (or (x[0] +/- ex[0]),..., (x[N] +/- ex[N])). See Arguments for further details.
 ### Arguments
 - `fFormula sFormula`: (`typedef std::string fFormula` passed) is the formula used to compute error.\
 Its implementation is the same as in the TFormula ROOT class. It recognise standard c++ math operators as sqrt(), pow(), etc...\
