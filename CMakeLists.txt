@@ -11,7 +11,9 @@ set(CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake)
 
 find_package(ROOT)
 
-add_compile_options(-I${ROOT_INCLUDE_DIRS} -std=c++17 -stdlib=libc++)
+set(CMAKE_CXX_FLAGS ${ROOT_CXX_FLAGS})
+
+add_compile_options(-I${ROOT_INCLUDE_DIRS})
 
 # inlcude PATHS
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
