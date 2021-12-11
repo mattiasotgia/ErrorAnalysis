@@ -1,0 +1,11 @@
+#    ErrorAnalysis - error propagation toolset - C++
+#    Author: Mattia Sotgia
+#    Version: 0.2 alpha
+
+
+cmake_minimum_required(VERSION 3.16)
+
+project(ErrorAnalysis VERSION 0.2)
+
+
+
