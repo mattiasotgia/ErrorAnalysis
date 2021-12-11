@@ -1,7 +1,7 @@
 /*
     ErrorAnalysis - error propagation toolset - C++
     Author: Mattia Sotgia
-    Version: 0.0 alpha
+    Version: 0.2 alpha
 */
 
 /*

@@ -6,17 +6,21 @@ This library is based upon [ROOT](https://root.cern/) public framework, mainly `
 
 ## Installation
 
-In your ($PATH) directory clone this repository using 
+In your ($INSTALL_PATH) directory clone this repository using 
 ```bash
-> git clone https://github.com/mattiasotgia/ErrorAnalysis.git
+$ git clone https://github.com/mattiasotgia/ErrorAnalysis.git
 ```
 and compile the shared library using
 ```bash
-> make
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ sudo make install
 ```
 Then go to $HOME and create (if non existing!) the `.rootrc` file by doing
 ```bash
-> touch .rootrc
+$ touch .rootrc
 ```
 and add the following line:
 ```
@@ -25,34 +29,35 @@ Rint.Logon: ~/rootlogon.C
 
 Finally, in your $HOME directory create a file named `rootlogon.C` by doing
 ```bash
-> touch .rootlogon.C
+$ touch .rootlogon.C
 ```
 and modify this file adding the following lines
 ```cpp
 {
-    gInterpreter->AddIncludePath("~/$PATH/");      // include PATH
-    gSystem->Load("~/$PATH/lib/libErrorAnalysis"); // load LIB
+    gInterpreter->AddIncludePath("/usr/local/include");
+    gSystem->Load("/usr/local/lib/libErrorAnalysis");
 }
 ```
 
 Now to load the Library in any program you'll need to
 ```cpp
-#include<ErrorAnalysis/ErrorAnalysis.h>
+#include<ErrorAnalysis.h>
 ```
 ### Compiling
 If using ROOT macros, no other compiler instruction is needed.
 To use this library in compiled c/c++ programs you'll need to do the following: 
 ```bash
-> g++ file_name.cpp -o exe_name -I$PATH/ -L$PATH/libs/ -lErrorAnalysis `root-config --glibs --cflags`
+$ g++ file_name.cpp -o exe_name -I/usr/local/include -L/usr/local/lib/ -lErrorAnalysis `root-config --glibs --cflags`
 ```
+where `` `root-config --glibs --cflags` `` is only needed if the code calls for other ROOT specific functions.
 ### Test example
 the `test.cpp` file give an example of this library usage, and can be compiled using:
 ```bash
-> g++ test.cpp -o test -I$PATH -L$PATH/lib/ -lErrorAnalysis `root-config --glibs --cflags`
+$ g++ test.cpp -o test -I/usr/local/include -L/usr/local/lib/ -lErrorAnalysis `root-config --glibs --cflags`
 ```
 and executed via 
 ```bash
-> ./test
+$ ./test
 ```
 ## Usage
 Two main functions:
