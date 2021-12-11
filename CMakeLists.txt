@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(ErrorAnalysis VERSION 0.2)
 
-set(CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake)
+# set(CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake)
 
 find_package(ROOT)
 
