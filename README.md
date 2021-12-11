@@ -22,14 +22,14 @@ Then go to $HOME and create (if non existing!) the `.rootrc` file by doing
 ```bash
 $ touch .rootrc
 ```
-and add the following line:
+and add the following line to `.rootrc`:
 ```
 Rint.Logon: ~/rootlogon.C
 ```
 
 Finally, in your $HOME directory create a file named `rootlogon.C` by doing
 ```bash
-$ touch .rootlogon.C
+$ touch rootlogon.C
 ```
 and modify this file adding the following lines
 ```cpp
