@@ -36,7 +36,7 @@ Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
     Double_t    diffF_before, diffF_after; //> Evaluate f diff
     Double_t    errMax;
 
-    Int_t fNdim = tFormula->GetNdim();
+    Int_t fNdim = tFormula->GetNdim(); //> Get funtion dimension
     if(fNdim==1) exit(1);
 
     Double_t    vChanged_i_component_before[fNdim];
