@@ -9,12 +9,10 @@ This library is based upon [ROOT](https://root.cern/) public framework, mainly `
 In your ($INSTALL_PATH) directory clone this repository using 
 ```bash
 $ git clone https://github.com/mattiasotgia/ErrorAnalysis.git
-$ cd ErrorAnalysis
+$ cd ErrorAnalysis/build
 ```
 and compile the shared library using
 ```bash
-$ mkdir build
-$ cd build
 $ cmake ..
 $ make
 $ sudo make install
