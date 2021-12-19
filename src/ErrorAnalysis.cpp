@@ -4,11 +4,11 @@
     Version: 0.2 alpha
 */
 
-/*
-    Requirement: 
-    ** ROOT include-flags -> `root-config --glibs --cflags`
-    ** If used in ROOT macro, use gSystem->Load()
-*/
+/**
+ * @brief Requirement: 
+ * ROOT include-flags -> `root-config --glibs --cflags`
+ * If used in ROOT macro, use gSystem->Load()
+ */
 
 #include<iostream>
 #include<string>
