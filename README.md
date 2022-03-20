@@ -1,6 +1,8 @@
 # ErrorAnalysis: `get_pValue` and `get_pError`
 C++ functions used to perform automatic error propagation using function evaluation in point .
 
+![License](https://img.shields.io/github/license/mattiasotgia/ErrorAnalysis)
+
 ## Requirements
 This library is based upon [ROOT](https://root.cern/) public framework, mainly `TFormula` class.
 
