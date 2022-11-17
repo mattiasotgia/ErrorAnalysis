@@ -20,12 +20,12 @@
 
 #include"ErrorAnalysis.h"
 
-Double_t get_pValue(fFormula sFormula, const Double_t* values){
+Double_t ErrorAnalysis::get_pValue(fFormula sFormula, Double_t* values){
     TFormula* tFormula = new TFormula("", sFormula.c_str());
     return tFormula->EvalPar(values);
 }
 
-Double_t get_pError(fFormula sFormula, const Double_t* values, const Double_t* errors){
+Double_t ErrorAnalysis::get_pError(fFormula sFormula, Double_t* values, Double_t* errors){
     double pError;
 
     TFormula* tFormula = new TFormula("", sFormula.c_str());
