@@ -36,7 +36,7 @@ namespace ErrorAnalysis {
      * @param values Array of variables (its dimension need to be exactly the same as the function dimension)
      * @return Double_t Value of funtion passed computed in point
      */
-    Double_t get_pValue(fFormula sFormula, Double_t* values);
+    Double_t get_pValue(fFormula sFormula, const Double_t* values);
 
     /**
      * @brief Get the pError object
@@ -53,7 +53,7 @@ namespace ErrorAnalysis {
      * @param errors Array of variable's errors (its dimension need to be exactly the same as the function dimension)
      * @return Double_t SquareRoot of SqaredSum of errore propagated by changing every parameter in its error range;
      */
-    Double_t get_pError(fFormula sFormula, Double_t* values, Double_t* errors);
+    Double_t get_pError(fFormula sFormula, const Double_t* values, const Double_t* errors);
 }; // ErrorAnalysis
 
 #endif
